@@ -7,7 +7,7 @@
         <Label class="action-bar-title" text="Home"></Label>
     </ActionBar>
 <StackLayout>
-<Button text="Search" tap="onButtonTap" />
+<Button text="Login" tap="onButtonTap" />
 <Label text="Current Event"></Label>
 <Image src="{{ url }}"> </Image>
 </StackLayout>

@@ -7,8 +7,10 @@ const config = require("~/shared/config");
 
 function LoginViewModel() {
     const viewModel = observableModule.fromObject({
-        email: "",
-        password: "",
+        email: "3701",
+        password: "3701",
+        role:"",
+        isBusy: false,
 
         signIn: function () {
 
@@ -18,21 +20,8 @@ function LoginViewModel() {
             /* ***********************************************************
             * Call your custom signin logic using the email and password data.
             *************************************************************/
-           
-        if (email === "1234" && password === "1234") {
-            dialogsModule.alert({
-                message:"Login Correct",
-            okButtonText: "OK"
-        });
-        appSettings.setString("username", "NickIliev");
-
-           }
-           else {
-
-            const topFrame = frameModule.topmost();
-            topFrame.navigate("browse/browse-page");
-              
-           }
+           this.doLogin(email, password);
+      
         },
 
         doLogin: function(username, password) {
@@ -56,21 +45,59 @@ function LoginViewModel() {
             })
             .then((data) => {
                 console.log(JSON.stringify(data));
-                data.forEach((noti) => {
-                    this.notifications.push({
-                        message: noti.message
-                    });
-                });
-                this.isBusy = false;
-            });
+            if (data !== undefined) {
+                if (data.length === 0) {
+                        // Unsuccessful login
+                        appSettings.clear();
+                        this.email = "";
+                        this.password = "";
+
+                        dialogsModule.alert({
+                            message:"Login Failed",
+                            okButtonText: "OK"
+                        });
+                    }
+                    else {
+                    data.forEach((noti) => {
+                        this.role = noti.role;
+                        });
+                    this.isBusy = false;
+                        if (this.role !== null) {
+                            dialogsModule.alert({
+                                message:"Login Successful",
+                                okButtonText: "OK"
+                            });       
+                            appSettings.setString("username", this.email);
+                            appSettings.setString("role", this.role);
+                        }
+                        else {
+                            dialogsModule.alert({
+                                message:"Login Failed",
+                                okButtonText: "OK"
+                            });
+                        }
+                    }          
+            }
+            else {
+                dialogsModule.alert({
+                    message:"Login Failed",
+                    okButtonText: "OK"
+                }); 
+            }
+        });
         },
 
         checkSignedIn: function() {
             // will return false if there is no "noBoolKey"
             const noBoolKey = appSettings.hasKey("username");
-            const username = appSettings.getString("username");
-            items.push(new Item("username", `${username}`));
-            console.log(username);
+            if (noBoolKey) {
+            this.username = appSettings.getString("username");
+            this.role = appSettings.getString("role");
+            }
+            else {
+                const topFrame = frameModule.topmost();
+                topFrame.navigate("login/login-page");
+            }   
         },
 
         logout: function() {
