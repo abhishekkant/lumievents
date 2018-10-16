@@ -2,6 +2,9 @@ const connectivityModule = require("tns-core-modules/connectivity");
 
 module.exports = {
     azNotificationsTableUrl:"https://lumievents.azurewebsites.net/tables/notifications",
+    azLoginTableUrl:"https://lumievents.azurewebsites.net/tables/userlist",
+    azEventsTableUrl:"https://lumievents.azurewebsites.net/tables/eventslist",
+    azPhotosTableUrl:"https://lumievents.azurewebsites.net/tables/photos",
     AZURE_STORAGE_CONNECTION_STRING: "DefaultEndpointsProtocol=https;AccountName=eventresources;AccountKey=gZJNy2J0LnZYKN+jhbs0ZjrFhCIRhX4/LBQtwv96+V0TO+x/OazEF7zQ3EWNnBYYi7oVYH1JdWNIwDZsoonw1A==;EndpointSuffix=core.windows.net",
     AzureContainer:"thailand",
     checkConnectivity: function() {
