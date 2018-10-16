@@ -1,0 +1,29 @@
+<Page
+    class="page"
+    navigatingTo="onNavigatingTo"  
+    xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Events List"></Label>
+    </ActionBar>
+
+<StackLayout>
+<SegmentedBar selectedIndex="{{ selectedDay }}">
+<SegmentedBar.items>
+<SegmentedBarItem title="Day 1" />
+<SegmentedBarItem title="Day 2" />
+<SegmentedBarItem title="Day 3" />
+<SegmentedBarItem title="Day 4" />
+</SegmentedBar.items>
+</SegmentedBar>
+    <ListView items="{{ allSessions }}" class="list-group">
+        <ListView.itemTemplate>
+            <StackLayout  class="list-group-item">
+                <Label text="{{ title }}" textWrap="true"></Label>
+                <Label text="{{ venue }}" textWrap="true"></Label>
+                <Label text="{{ start }}" textWrap="true"></Label>
+            </StackLayout>
+        </ListView.itemTemplate>
+    </ListView>
+    </StackLayout>
+</Page>
