@@ -1,0 +1,30 @@
+<Page loaded="onNavigatingTo" class="page"
+    xmlns="http://schemas.nativescript.org/tns.xsd" >
+    <ActionBar class="action-bar">
+    <NavigationButton tap="Cancel" android.systemIcon="ic_menu_back"/>
+        <Label class="action-bar-title" text="Event Edit"></Label>
+    </ActionBar>
+    <ScrollView>
+        <StackLayout>
+        <Label class="h2 text-center" text="Event Name"></Label>
+                 <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" autocorrect="false" autocapitalization="none"
+                text="{{ EventName }}"></TextField>
+                 <Label class="h2 text-center" text="Event Venue"></Label>
+                 <TextField class="m-t-10 m-b-10 m-l-15 m-r-15"   autocorrect="false" autocapitalization="none"
+                text="{{ EventVenue }}"></TextField>
+                 <Label class="h2 text-center" text="Event Start Date"></Label>
+                <TextField class="m-t-10 m-b-10 m-l-15 m-r-15"  autocorrect="false" autocapitalization="none"
+                text="{{ EventDate }}"></TextField>
+
+    <Label class="h2 text-center" text="Event End Date"></Label>
+                <TextField class="m-t-10 m-b-10 m-l-15 m-r-15"  autocorrect="false" autocapitalization="none"
+                text="{{ EventEndDate }}"></TextField>
+
+                 <TextField class="m-t-10 m-b-10 m-l-15 m-r-15"   visibility="collapse" autocapitalization="none"
+                text="{{ id }}"></TextField>
+                <Image src="~/images/luminous-logo.jpg"> </Image>
+            <Button class="btn btn-primary"  index="{{ id }}" text="UPDATE" tap="update"></Button>
+             <Button class="btn btn-warning"  text="Cancel" tap="Cancel"></Button>
+    </StackLayout>
+    </ScrollView>
+</Page>

@@ -1,6 +1,6 @@
 <Page
     class="page"
-    navigatingTo="onNavigatingTo"  
+    loaded="onNavigatingTo"  
     xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
@@ -16,12 +16,22 @@
 <SegmentedBarItem title="Day 4" />
 </SegmentedBar.items>
 </SegmentedBar>
+<StackLayout style="margin:15px">
+
+<Label text="Current Event" style="text-align: center;color:Red" ></Label>
+ <Label text="Event Name: class="text-left" "></Label> <Label text="{{ CurrentEventName }}" class="text-left" ></Label>
+<Label text="Event Date: "></Label><Label text="{{ CurrentEventDate }}" textWrap="true" style="float:right"></Label>
+<Label text="Event Date: "></Label> <Label text="{{ CurrentEventVenue }}" textWrap="true"></Label>
+<Image src="~/images/luminous-logo.jpg"> </Image>
+</StackLayout>
     <ListView items="{{ allSessions }}" class="list-group">
         <ListView.itemTemplate>
             <StackLayout  class="list-group-item">
-                <Label text="{{ title }}" textWrap="true"></Label>
+                 <Label text="{{ id }}"  visibility="collapse"></Label>
+                <Label text="{{ name }}" textWrap="true"></Label>
                 <Label text="{{ venue }}" textWrap="true"></Label>
                 <Label text="{{ start }}" textWrap="true"></Label>
+                <Button class="btn btn-primary"  index="{{ id }}" text="EDIT" tap="edit"></Button>
             </StackLayout>
         </ListView.itemTemplate>
     </ListView>

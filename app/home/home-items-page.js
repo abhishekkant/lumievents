@@ -5,6 +5,7 @@ const segmentedBarModule = require("tns-core-modules/ui/segmented-bar");
 function onNavigatingTo(args) {
     const component = args.object;
     component.bindingContext = new HomeItemsViewModel();
+    component.bindingContext.onload();
 }
 
 
@@ -37,6 +38,20 @@ function sbLoaded(args) {
     });
 
 }
+function edit(args) {
+    var target = args.object;
+    var index = target.index;
+   
+    //var homemodel = new HomeItemsViewModel();
+   // homemodel.edit(index);
+     var navigationOptions={
+    moduleName:'editEvent/editEvent-page',
+      context:index
+        }
+
+        frameModule.topmost().navigate(navigationOptions);
+   // alert(index);
+};
 
 function onItemTap(args) {
     const view = args.view;
@@ -58,5 +73,5 @@ function onItemTap(args) {
 exports.onItemTap = onItemTap;
 exports.onNavigatingTo = onNavigatingTo;
 exports.sbLoaded =  sbLoaded;
-
+exports.edit =  edit;
 
