@@ -151,9 +151,9 @@ function HomeItemsViewModel() {
                         data.forEach((noti) => {
                             viewModel.CurrentEventName = noti.name;
                             viewModel.CurrentEventVenue = noti.venue;
-                            viewModel.CurrentEventDate = noti.start;
+                            viewModel.CurrentEventDate = new Date(noti.start);
                             viewModel.CurrentEventImage= noti.imageurl;
-                            viewModel.CurrentEventEndDate=noti.end;
+                            viewModel.CurrentEventEndDate=new Date(noti.end);
                             });
                        // viewModel.allSessions=data;
                        

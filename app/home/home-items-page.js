@@ -6,6 +6,7 @@ function onNavigatingTo(args) {
     const component = args.object;
     component.bindingContext = new HomeItemsViewModel();
     component.bindingContext.onload();
+    
 }
 
 
@@ -45,7 +46,7 @@ function edit(args) {
     //var homemodel = new HomeItemsViewModel();
    // homemodel.edit(index);
      var navigationOptions={
-    moduleName:'editEvent/editEvent-page',
+       moduleName:'editEvent/editEvent-page',
       context:index
         }
 
