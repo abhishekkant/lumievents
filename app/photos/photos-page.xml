@@ -5,5 +5,7 @@
     </ActionBar>
 
     <StackLayout>
+    <Button text="Select Image" tap="selectPhoto" />
+   
     </StackLayout>
 </Page>
