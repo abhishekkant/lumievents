@@ -1,29 +1,33 @@
 {
   "nativescript": {
     "id": "org.gtmcatalyst.luminousevents",
-    "tns-android": {
+    "tns-ios": {
       "version": "4.2.0"
     },
-    "tns-ios": {
+    "tns-android": {
       "version": "4.2.0"
     }
   },
   "description": "NativeScript Application",
   "license": "SEE LICENSE IN <your-license-filename>",
-  "repository": "<fill-your-repository-here>",
+  "repository": "https://github.com/abhishekkant/lumievents",
   "scripts": {
     "lint": "eslint \"app/**/*.js\""
   },
   "dependencies": {
-    "azure-storage": "2.10.1",
+    "image-to-base64": "^2.0.1",
+    "nativescript-azure-storage": "^1.2.0",
     "nativescript-imagepicker": "6.0.4",
-    "nativescript-local-notifications": "3.1.0",
     "nativescript-permissions": "1.2.3",
     "nativescript-theme-core": "~1.0.4",
-    "tns-core-modules": "4.2.1"
+    "stream": "0.0.2",
+    "tns-core-modules": "4.2.1",
+    "url": "^0.11.0",
+    "util": "^0.11.0"
   },
   "devDependencies": {
     "eslint": "5.6.0",
+    "lazy": "1.0.11",
     "nativescript-dev-sass": "~1.6.0",
     "nativescript-dev-webpack": "0.16.2"
   },

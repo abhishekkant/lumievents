@@ -2,7 +2,7 @@
     xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar">
         <Label class="action-bar-title" text="Info"></Label>
-        <ActionItem  class="btn btn-primary" text="Add" android.systemIcon="ic_menu_add" android.position="right" tap="onAddInfoButtonTap"  visibility="{{ addButtonVisibility }}"></ActionItem >
+        <ActionItem  class="btn btn-primary" text="Add" android.systemIcon="ic_menu_add" android.position="right" tap="onAddInfoButtonTap"  visibility="{{ addButtonVisibility }}"></ActionItem>
     </ActionBar>
 
     <StackLayout>

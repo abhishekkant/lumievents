@@ -72,9 +72,7 @@ function LoginViewModel() {
                             appSettings.setString("username", this.email);
                             appSettings.setString("role", this.role);
                              viewModel.set('isLoggedin',true);
-                              
-                              
-                        
+ 
                         }
                         else {
                             dialogsModule.alert({

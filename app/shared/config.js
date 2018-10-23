@@ -1,6 +1,5 @@
 const connectivityModule = require("tns-core-modules/connectivity");
 const browserUtil = require("utils/utils");
-const LocalNotifications = require("nativescript-local-notifications");
 const dialog = require("ui/dialogs");
 
 exports.launch = function(url) {
@@ -9,7 +8,7 @@ exports.launch = function(url) {
 
 
 exports.scheduleNotification = function() {
-    LocalNotifications.addOnMessageReceivedCallback(
+  /* LocalNotifications.addOnMessageReceivedCallback(
         (notificationData) => {
             dialog.alert({
                 "title": notificationData.title,
@@ -53,7 +52,7 @@ exports.scheduleNotification = function() {
                   }
               )
         }
-    );
+    );*/
     //  LocalNotifications.cancelAll();
 };
 
