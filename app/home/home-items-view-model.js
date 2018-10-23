@@ -3,10 +3,10 @@ const frameModule = require("tns-core-modules/ui/frame");
 const dialogsModule = require("ui/dialogs");
 const fetchModule = require("fetch");
 const config = require("~/shared/config");
-
+const appSettings = require("application-settings");
 function HomeItemsViewModel() {
     const viewModel = observableModule.fromObject({
-             
+        
         allSessions: [
             ],
 
@@ -66,6 +66,8 @@ function HomeItemsViewModel() {
         CurrentEventDate:"",
         CurrentEventEndDate:"",
         CurrentEventImage:"",
+        Username:"",
+        Role:"",
       
         // edit: function (index) {
         //     //alert(index);
@@ -120,6 +122,7 @@ function HomeItemsViewModel() {
 
         onload: function () {
           
+
             let CurrentEventUrl=config.azEventsTableUrl;
             var CurrentDate="2018-12-15T06:30:00.000Z";
             CurrentEventUrl = CurrentEventUrl.concat("?$filter=start%20eq%20'", CurrentDate,"'");
@@ -151,11 +154,14 @@ function HomeItemsViewModel() {
                         data.forEach((noti) => {
                             viewModel.CurrentEventName = noti.name;
                             viewModel.CurrentEventVenue = noti.venue;
-                            viewModel.CurrentEventDate = new Date(noti.start);
+                            viewModel.CurrentEventDate = new Date(noti.start).toLocaleString();
                             viewModel.CurrentEventImage= noti.imageurl;
-                            viewModel.CurrentEventEndDate=new Date(noti.end);
+                            viewModel.CurrentEventEndDate=new Date(noti.end).toLocaleString();
+                           
                             });
                        // viewModel.allSessions=data;
+                       viewModel.Username = appSettings.getString("username");
+                       viewModel.Role = appSettings.getString("role");
                        
                     }          
             }
@@ -196,9 +202,21 @@ function HomeItemsViewModel() {
                         });
                     }
                     else {
+                        viewModel.Role = appSettings.getString("role");
                       
-                        viewModel.allSessions=data;
+                        Object.keys(data).map(
+                            function(object){
+                                data[object]["roll"]= viewModel.Role
+                          });
+                      
+                          data.forEach(function(record) {
+                                record.start = new Date(record.start).toLocaleString();
+                                //record.start= record.start.getDate()  + "-" + (record.start.getMonth()+1) + "-" + record.start.getFullYear() + " " +
+                               // record.start.getHours() + ":" + record.start.getMinutes();
+                                record.end = new Date(record.end).toLocaleString();
+                        });
                        
+                        viewModel.allSessions=data;  
                     }          
             }
             else {

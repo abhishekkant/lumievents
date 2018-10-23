@@ -4,6 +4,7 @@ const dialogsModule = require("ui/dialogs");
 const appSettings = require("application-settings");
 const fetchModule = require("fetch");
 const config = require("~/shared/config");
+const getFrameById = require("tns-core-modules/ui/frame").getFrameById;
 
 function LoginViewModel() {
     const viewModel = observableModule.fromObject({
@@ -11,6 +12,7 @@ function LoginViewModel() {
         password: "3701",
         role:"",
         isBusy: false,
+        isLoggedin: false,
 
         signIn: function () {
 
@@ -69,12 +71,17 @@ function LoginViewModel() {
                             });       
                             appSettings.setString("username", this.email);
                             appSettings.setString("role", this.role);
+                             viewModel.set('isLoggedin',true);
+                              
+                              
+                        
                         }
                         else {
                             dialogsModule.alert({
                                 message:"Login Failed",
                                 okButtonText: "OK"
                             });
+                            viewModel.set('isLoggedin',false);
                         }
                     }          
             }
@@ -83,6 +90,7 @@ function LoginViewModel() {
                     message:"Login Failed",
                     okButtonText: "OK"
                 }); 
+                viewModel.set('isLoggedin',false);
             }
         });
         },
@@ -91,10 +99,15 @@ function LoginViewModel() {
             // will return false if there is no "noBoolKey"
             const noBoolKey = appSettings.hasKey("username");
             if (noBoolKey) {
-            this.username = appSettings.getString("username");
-            this.role = appSettings.getString("role");
+                viewModel.set('isLoggedin',true);
+                    this.username = appSettings.getString("username");
+                    this.role = appSettings.getString("role");
+                   
+                    const topFrame = frameModule.topmost();
+                    topFrame.navigate("home/home-items-page");
             }
             else {
+                viewModel.set('isLoggedin',false);
                 const topFrame = frameModule.topmost();
                 topFrame.navigate("login/login-page");
             }   
