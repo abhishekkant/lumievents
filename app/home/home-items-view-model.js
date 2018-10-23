@@ -1,29 +1,14 @@
 const observableModule = require("tns-core-modules/data/observable");
-
+const frameModule = require("tns-core-modules/ui/frame");
+const dialogsModule = require("ui/dialogs");
+const fetchModule = require("fetch");
+const config = require("~/shared/config");
+const appSettings = require("application-settings");
 function HomeItemsViewModel() {
     const viewModel = observableModule.fromObject({
+        
         allSessions: [
-            {
-                title:"Test Event 1",
-        start:new Date(2018, 12, 20, 8, 0),
-        end:new Date(2018, 12, 20, 8, 0),
-        venue:"Room 1",
-        active:true,
-        eventimage:""
-
-    },
-    {
-        title:"Test Event 2",
-start:new Date(2018, 12, 20, 9, 0),
-end:new Date(2018, 12, 20, 10, 0),
-venue:"Room 1",
-active:true,
-eventimage:""
-
-}
-
-
-        ],
+            ],
 
         items: [
             {
@@ -75,7 +60,176 @@ eventimage:""
                 description: "Description for Item 12"
             }
         ],
-        selectedDay:"Day 2"
+        selectedDay:"Day 2",
+        CurrentEventName:"",
+        CurrentEventVenue:"",
+        CurrentEventDate:"",
+        CurrentEventEndDate:"",
+        CurrentEventImage:"",
+        Username:"",
+        Role:"",
+      
+        // edit: function (index) {
+        //     //alert(index);
+        //             let EventUrl=config.azEventsTableUrl;
+        //             var id=index;
+        //             EventUrl = EventUrl.concat("?$filter=id%20eq%20'", id,"'");
+                
+        //             fetchModule.fetch(CurrentEventUrl, {
+        //                 headers: {
+        //                     "ZUMO-API-VERSION":"2.0.0"
+        //                 }
+        //             })
+        //             .then((response) => {
+        //                 if (!response.ok) {
+        //                     console.log(JSON.stringify(response));
+        //                 }
+        //                 else {
+        //                     console.log(JSON.stringify(response));
+            
+        //                     return response.json();
+        //                 }
+        //             })
+        //             .then((data) => {
+        //             if (data !== undefined) {
+        //                 if (data.length === 0) {
+        //                         dialogsModule.alert({
+        //                             message:"No Current Event Found",
+        //                             okButtonText: "OK"
+        //                         });
+        //                     }
+        //                     else {
+        //                         data.forEach((noti) => {
+        //                             viewModel.CurrentEventName = noti.name;
+        //                             viewModel.CurrentEventVenue = noti.venue;
+        //                             viewModel.CurrentEventDate = noti.start;
+        //                             viewModel.CurrentEventImage= noti.imageurl;
+        //                             });
+        //                     // viewModel.allSessions=data;
+                            
+        //                     }          
+        //             }
+        //             else {
+        //                 dialogsModule.alert({
+        //                     message:"No Current Event Found",
+        //                     okButtonText: "OK"
+        //                 }); 
+        //             } 
+        //         });
+            
+          
+        //     },
+
+        onload: function () {
+          
+
+            let CurrentEventUrl=config.azEventsTableUrl;
+            var CurrentDate="2018-12-15T06:30:00.000Z";
+            CurrentEventUrl = CurrentEventUrl.concat("?$filter=start%20eq%20'", CurrentDate,"'");
+           
+            fetchModule.fetch(CurrentEventUrl, {
+                headers: {
+                    "ZUMO-API-VERSION":"2.0.0"
+                }
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    console.log(JSON.stringify(response));
+                }
+                else {
+                    console.log(JSON.stringify(response));
+    
+                    return response.json();
+                }
+            })
+            .then((data) => {
+               if (data !== undefined) {
+                if (data.length === 0) {
+                         dialogsModule.alert({
+                            message:"No Current Event Found",
+                            okButtonText: "OK"
+                        });
+                    }
+                    else {
+                        data.forEach((noti) => {
+                            viewModel.CurrentEventName = noti.name;
+                            viewModel.CurrentEventVenue = noti.venue;
+                            viewModel.CurrentEventDate = new Date(noti.start).toLocaleString();
+                            viewModel.CurrentEventImage= noti.imageurl;
+                            viewModel.CurrentEventEndDate=new Date(noti.end).toLocaleString();
+                           
+                            });
+                       // viewModel.allSessions=data;
+                       viewModel.Username = appSettings.getString("username");
+                       viewModel.Role = appSettings.getString("role");
+                       
+                    }          
+            }
+            else {
+                dialogsModule.alert({
+                    message:"No Current Event Found",
+                    okButtonText: "OK"
+                }); 
+            } 
+         });
+    
+    
+    
+           /* FOR LIST BINDING  */
+            let Eventsurl = config.azEventsTableUrl;
+            Eventsurl = Eventsurl.concat("?$filter=start%20ne%20'", CurrentDate,"'");
+            fetchModule.fetch(Eventsurl, {
+                headers: {
+                    "ZUMO-API-VERSION":"2.0.0"
+                }
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    console.log(JSON.stringify(response));
+                }
+                else {
+                    console.log(JSON.stringify(response));
+    
+                    return response.json();
+                }
+            })
+            .then((data) => {
+               if (data !== undefined) {
+                if (data.length === 0) {
+                         dialogsModule.alert({
+                            message:"No Event Found",
+                            okButtonText: "OK"
+                        });
+                    }
+                    else {
+                        viewModel.Role = appSettings.getString("role");
+                      
+                        Object.keys(data).map(
+                            function(object){
+                                data[object]["roll"]= viewModel.Role
+                          });
+                      
+                          data.forEach(function(record) {
+                                record.start = new Date(record.start).toLocaleString();
+                                //record.start= record.start.getDate()  + "-" + (record.start.getMonth()+1) + "-" + record.start.getFullYear() + " " +
+                               // record.start.getHours() + ":" + record.start.getMinutes();
+                                record.end = new Date(record.end).toLocaleString();
+                        });
+                       
+                        viewModel.allSessions=data;  
+                    }          
+            }
+            else {
+                dialogsModule.alert({
+                    message:"No Event Found",
+                    okButtonText: "OK"
+                }); 
+            }
+    
+           
+        });
+    
+        },
     });
 
     return viewModel;
