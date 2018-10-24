@@ -71,7 +71,8 @@ function selectPhoto() {
             const imageFromLocalFile = imageSourceModule.fromFile(path);
             
            let base64string = imageFromLocalFile.toBase64String('jpg');
-           azureNSStorage.uploadBlob(mycontainer, blobName, base64string)
+           var buffer = new Buffer(base64string, 'base64');
+           azureNSStorage.uploadBlob(mycontainer, blobName, buffer)
            .then(() => console.log(`Uploaded successfuly`))
            .catch((err) => console.log(`Error uploading: ${err}`));
            
