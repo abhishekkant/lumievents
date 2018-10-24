@@ -17,7 +17,6 @@
   "dependencies": {
     "image-to-base64": "^2.0.1",
     "nativescript-azure-storage": "^1.2.0",
-    "nativescript-background-http": "3.3.0",
     "nativescript-imagepicker": "6.0.4",
     "nativescript-permissions": "1.2.3",
     "nativescript-theme-core": "~1.0.4",
@@ -30,7 +29,8 @@
     "eslint": "5.6.0",
     "lazy": "1.0.11",
     "nativescript-dev-sass": "~1.6.0",
-    "nativescript-dev-webpack": "0.16.2"
+    "nativescript-dev-webpack": "0.16.2",
+    "path": "0.12.7"
   },
   "readme": "NativeScript Application"
 }

@@ -11,9 +11,9 @@ const config = require("~/shared/config");
 //const platform = require("tns-core-modules/platform");
 const imageSourceModule = require("tns-core-modules/image-source");
 //const fileSystemModule = require("tns-core-modules/file-system");
-const bghttp = require("nativescript-background-http");
+//const bghttp = require("nativescript-background-http");
 
-const session = bghttp.session("file-upload");
+//const session = bghttp.session("file-upload");
 const fileSystemModule = require("tns-core-modules/file-system");
 /* ***********************************************************
 * Use the "onNavigatingTo" handler to initialize the page binding context.
@@ -54,7 +54,7 @@ function selectPhoto() {
     //const blobService = azure.createBlobService();
     const mycontainer = config.AzureContainer;
     const azureNSStorage = new nsAzureStorage.NativeScriptAzureStorage(config.AZURE_STORAGE_CONNECTION_STRING);
-    const blobName = "sample.jpg";
+    const blobName = "sample.png";
     const context = imagepicker.create({ mode: "single" }); // use "multiple" for multiple selection
     context
     .authorize()
@@ -70,14 +70,25 @@ function selectPhoto() {
             //const path = fileSystemModule.path.join(folder.path, "images/logo.png");
             const imageFromLocalFile = imageSourceModule.fromFile(path);
             
-           let base64string = imageFromLocalFile.toBase64String('jpg');
-           var buffer = new Buffer(base64string, 'base64');
-           azureNSStorage.uploadBlob(mycontainer, blobName, buffer)
-           .then(() => console.log(`Uploaded successfuly`))
-           .catch((err) => console.log(`Error uploading: ${err}`));
+           let base64string = imageFromLocalFile.toBase64String('png');
+           
+          // var buffer = new Buffer(base64string, 'base64');
+           azureNSStorage.uploadBlob(mycontainer, blobName, base64string)
+           .then(() => alert(`Uploaded successfuly`))
+           .catch((err) => alert(`Error uploading: ${err}`));
            
             
-
+        //    var blobService = nsAzureStorage.createBlobService();
+        //    blobService.createBlockBlobFromLocalFile(mycontainer, blobName, path, function(error, result, response) {
+        //        if (!error) {
+                
+        //            // file uploaded 
+        //             alert(`Uploaded successfuly`);
+        //        }
+        //        else{
+        //            alert(error);
+        //        }
+        //      })
 
         //     const execute = async () => {
         //     response = await uploadLocalFile(mycontainer, localFilePath);
@@ -87,76 +98,76 @@ function selectPhoto() {
          });
        // list.items = selection;
     }).catch((e) => {
-        // process error
+        alert(e);
     });
 }
 
 
 function selectPhoto2() {
 
-//     //Generating Unique Image Name Using Time.
-// vard=newDate();
-// vart=d.getTime();
-// this.picName="Upload"+t.toString()+".jpg";
+// //     //Generating Unique Image Name Using Time.
+// // vard=newDate();
+// // vart=d.getTime();
+// // this.picName="Upload"+t.toString()+".jpg";
   
-    const mycontainer = config.AzureContainer;
-    const azURL = "https://lumievents.blob.core.windows.net/" + mycontainer;
-    const blobName = "sample2.jpg";
-    const context = imagepicker.create({ mode: "single" }); // use "multiple" for multiple selection
-    context
-    .authorize()
-    .then(() => {
-        return context.present();
-    })
-    .then((selection) => {
-        selection.forEach((selected) => {
+//     const mycontainer = config.AzureContainer;
+//     const azURL = "https://lumievents.blob.core.windows.net/" + mycontainer;
+//     const blobName = "sample2.jpg";
+//     const context = imagepicker.create({ mode: "single" }); // use "multiple" for multiple selection
+//     context
+//     .authorize()
+//     .then(() => {
+//         return context.present();
+//     })
+//     .then((selection) => {
+//         selection.forEach((selected) => {
 
-            // Check file size is lower than 256MB
-            // process the selected image
-            // Create a blob
-            let path = selected.android;
-            let imageFromLocalFile = imageSourceModule.fromFile(path);
-            let imageFile = fileSystemModule.File.fromPath(path);
-            let binarySource = imageFile.readSync((err) => {
-                console.log(err);
-            });
-            let filesize = binarySource.size;
-           let base64string = imageFromLocalFile.toBase64String("jpg");
-            let constrequest =
-                    {
-                    url:azURL,
-                    method:"PUT",
-                    headers:
-                    {
-                    "cache-control":"no-cache",
-                    "x-ms-blob-content-disposition":"attachment;",
-                    "x-ms-meta-m2":"v2",
-                    "x-ms-meta-m1":"v1",
-                    "x-ms-blob-type":"BlockBlob",
-                    "Content-Type":"application/octet-stream",
-                    "File-Name":path,
-                    "x-ms-date":"2018-10-24", //Provide date
-                    "x-ms-version":"2018-03-28",
-                    "Content-Length":filesize,
-                    "Authorization": "SharedKey eventresources:gZJNy2J0LnZYKN+jhbs0ZjrFhCIRhX4/LBQtwv96+V0TO+x/OazEF7zQ3EWNnBYYi7oVYH1JdWNIwDZsoonw1A=="
-                    },
-                    description:"{ "uploading": '+ path +"' }"
-                    };
+//             // Check file size is lower than 256MB
+//             // process the selected image
+//             // Create a blob
+//             let path = selected.android;
+//             let imageFromLocalFile = imageSourceModule.fromFile(path);
+//             let imageFile = fileSystemModule.File.fromPath(path);
+//             let binarySource = imageFile.readSync((err) => {
+//                 console.log(err);
+//             });
+//             let filesize = binarySource.size;
+//            let base64string = imageFromLocalFile.toBase64String("jpg");
+//             let constrequest =
+//                     {
+//                     url:azURL,
+//                     method:"PUT",
+//                     headers:
+//                     {
+//                     "cache-control":"no-cache",
+//                     "x-ms-blob-content-disposition":"attachment;",
+//                     "x-ms-meta-m2":"v2",
+//                     "x-ms-meta-m1":"v1",
+//                     "x-ms-blob-type":"BlockBlob",
+//                     "Content-Type":"application/octet-stream",
+//                     "File-Name":path,
+//                     "x-ms-date":"2018-10-24", //Provide date
+//                     "x-ms-version":"2018-03-28",
+//                     "Content-Length":filesize,
+//                     "Authorization": "SharedKey eventresources:gZJNy2J0LnZYKN+jhbs0ZjrFhCIRhX4/LBQtwv96+V0TO+x/OazEF7zQ3EWNnBYYi7oVYH1JdWNIwDZsoonw1A=="
+//                     },
+//                     description:{ "uploading": '+ path +"' },
+//                     };
 
-                    const task = session.uploadFile(this.picture, request);
-                    task.on("complete", (event) => {
-                    console.log("Uploaded `"+ this.picture+"`");
-                    });
+//                     const task = session.uploadFile(this.picture, request);
+//                     task.on("complete", (event) => {
+//                     console.log("Uploaded `"+ this.picture+"`");
+//                     });
 
-                    task.on("error", event=> {
-                    console.log(event);
-                    console.log("Could not upload `"+ this.picture +"`. "+event.eventName);
-                    });         
-                            });
-                        // list.items = selection;
-                        }).catch((e) => {
-                            // process error
-                        });
+//                     task.on("error", event=> {
+//                     console.log(event);
+//                     console.log("Could not upload `"+ this.picture +"`. "+event.eventName);
+//                     });         
+//                             });
+//                         // list.items = selection;
+//                         }).catch((e) => {
+//                             // process error
+//                         });
 }
 
 exports.onNavigatingTo = onNavigatingTo;
