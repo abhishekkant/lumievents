@@ -70,10 +70,13 @@ function selectPhoto() {
             //const path = fileSystemModule.path.join(folder.path, "images/logo.png");
             const imageFromLocalFile = imageSourceModule.fromFile(path);
             
-           
+           let base64string = imageFromLocalFile.toBase64String('jpg');
            azureNSStorage.uploadBlob(mycontainer, blobName, base64string)
-           .then(() => console.log("Uploaded successfuly"))
+           .then(() => console.log(`Uploaded successfuly`))
            .catch((err) => console.log(`Error uploading: ${err}`));
+           
+            
+
 
         //     const execute = async () => {
         //     response = await uploadLocalFile(mycontainer, localFilePath);
