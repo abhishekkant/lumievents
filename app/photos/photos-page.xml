@@ -6,6 +6,6 @@
 
     <StackLayout>
     <Button text="Select Image" tap="selectPhoto" />
-   
+   <Button text="Upload Image 2" tap="selectPhoto2" />
     </StackLayout>
 </Page>
