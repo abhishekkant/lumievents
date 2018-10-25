@@ -14,7 +14,6 @@ const imageSourceModule = require("tns-core-modules/image-source");
 const bghttp = require("nativescript-background-http");
 const session = bghttp.session("file-upload");
 const fileSystemModule = require("tns-core-modules/file-system");
-var azure = require('fast-azure-storage')
 /* ***********************************************************
 * Use the "onNavigatingTo" handler to initialize the page binding context.
 *************************************************************/
@@ -70,7 +69,7 @@ function selectPhoto() {
             //const path = fileSystemModule.path.join(folder.path, "images/logo.png");
             const imageFromLocalFile = imageSourceModule.fromFile(path);
             
-           let base64string = imageFromLocalFile.toBase64String('png');
+           let base64string = imageFromLocalFile.toBase64String('jpg');
            
           // var buffer = new Buffer(base64string, 'base64');
            azureNSStorage.uploadBlob(mycontainer, blobName, base64string)
@@ -135,19 +134,19 @@ function selectPhoto2() {
             let imageFromLocalFile = imageSourceModule.fromFile(path);
             let base64string = imageFromLocalFile.toBase64String('png');
 // Common options using shared key authentication
-var options = {
-    accountId:"eventresources",
-    accessKey:"gZJNy2J0LnZYKN+jhbs0ZjrFhCIRhX4/LBQtwv96+V0TO+x/OazEF7zQ3EWNnBYYi7oVYH1JdWNIwDZsoonw1A=="
-  };
-  var blob  = new azure.Blob(options);
-  var buffer = new Buffer(base64string, 'base64');
-  var blobContent = buffer;//'Sample content'; // The content can be a string or a Buffer
-// Create container and upload a blob
-blob.createContainer(mycontainer).then(function() {
-  return blob.putBlob(mycontainer, blobName, {
-    type:  'BlockBlob',     // Type of the blob 
-  }, blobContent);
-});
+// var options = {
+//     accountId:"eventresources",
+//     accessKey:"gZJNy2J0LnZYKN+jhbs0ZjrFhCIRhX4/LBQtwv96+V0TO+x/OazEF7zQ3EWNnBYYi7oVYH1JdWNIwDZsoonw1A=="
+//   };
+//   var blob  = new azure.Blob(options);
+//   var buffer = new Buffer(base64string, 'base64');
+//   var blobContent = buffer;//'Sample content'; // The content can be a string or a Buffer
+// // Create container and upload a blob
+// blob.createContainer(mycontainer).then(function() {
+//   return blob.putBlob(mycontainer, blobName, {
+//     type:  'BlockBlob',     // Type of the blob 
+//   }, blobContent);
+// });
 
 
 
