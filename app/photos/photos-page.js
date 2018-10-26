@@ -6,20 +6,23 @@ const imagepicker = require("nativescript-imagepicker");
 // const util = require("util");
 // const stream = require("stream");
 // const emitter = require("emitter");
-const nsAzureStorage = require("nativescript-azure-storage");
+//const nsAzureStorage = require("nativescript-azure-storage");
 const config = require("~/shared/config");
 //const platform = require("tns-core-modules/platform");
-const imageSourceModule = require("tns-core-modules/image-source");
+//const imageSourceModule = require("tns-core-modules/image-source");
 //const fileSystemModule = require("tns-core-modules/file-system");
-const bghttp = require("nativescript-background-http");
-const session = bghttp.session("file-upload");
-const fileSystemModule = require("tns-core-modules/file-system");
+//const bghttp = require("nativescript-background-http");
+//const session = bghttp.session("file-upload");
+//const fileSystemModule = require("tns-core-modules/file-system");
 /* ***********************************************************
 * Use the "onNavigatingTo" handler to initialize the page binding context.
 *************************************************************/
+
+
 function onNavigatingTo(args) {
     const page = args.object;
     page.bindingContext = new PhotosViewModel();
+    page.bindingContext.onload();
 }
 
 /*function base64Encode(value) {
@@ -104,7 +107,7 @@ function selectPhoto() {
 
 function selectPhoto2() {
  
-//     //Generating Unique Image Name Using Time.
+     //Generating Unique Image Name Using Time.
 // vard=newDate();
 // vart=d.getTime();
 // this.picName="Upload"+t.toString()+".jpg";
@@ -112,27 +115,27 @@ function selectPhoto2() {
 
 
 
-    const mycontainer = config.AzureContainer;
-    const azURL = "https://lumievents.blob.core.windows.net/" + mycontainer;
-    const blobName = "sample2.jpg";
-    const context = imagepicker.create({ mode: "single" }); // use "multiple" for multiple selection
-    context
-    .authorize()
-    .then(() => {
-        return context.present();
-    })
-    .then((selection) => {
-        selection.forEach((selected) => {
+    // const mycontainer = config.AzureContainer;
+    // const azURL = "https://lumievents.blob.core.windows.net/" + mycontainer;
+    // const blobName = "sample2.jpg";
+    // const context = imagepicker.create({ mode: "single" }); // use "multiple" for multiple selection
+    // context
+    // .authorize()
+    // .then(() => {
+    //     return context.present();
+    // })
+    // .then((selection) => {
+    //     selection.forEach((selected) => {
 
-            // Check file size is lower than 256MB
-            // process the selected image
-            // Create a blob
+    //         // Check file size is lower than 256MB
+    //         // process the selected image
+    //         // Create a blob
 
           
 
-            let path = selected.android;
-            let imageFromLocalFile = imageSourceModule.fromFile(path);
-            let base64string = imageFromLocalFile.toBase64String('png');
+    //         let path = selected.android;
+    //         let imageFromLocalFile = imageSourceModule.fromFile(path);
+    //         let base64string = imageFromLocalFile.toBase64String('png');
 // Common options using shared key authentication
 // var options = {
 //     accountId:"eventresources",
@@ -154,17 +157,17 @@ function selectPhoto2() {
 
 
 
-            var blobService = azure.createBlobService();
+//             var blobService = azure.createBlobService();
  
-blobService.createBlockBlobFromLocalFile(mycontainer, blobName, path, function(error, result, response) {
-  if (!error) {
-    // file uploaded
+// blobService.createBlockBlobFromLocalFile(mycontainer, blobName, path, function(error, result, response) {
+//   if (!error) {
+//     // file uploaded
     
-  }
-  else {
-    alert(error);
-  }
-});
+//   }
+//   else {
+//     alert(error);
+//   }
+// });
             
         //     let imageFromLocalFile = imageSourceModule.fromFile(path);
         //     let imageFile = fileSystemModule.File.fromPath(path);
@@ -213,10 +216,10 @@ blobService.createBlockBlobFromLocalFile(mycontainer, blobName, path, function(e
                       
                       
                       
-                            // list.items = selection;
-                        }).catch((e) => {
-                            alert(e);
-                        });
+                        //     // list.items = selection;
+                        // }).catch((e) => {
+                        //     alert(e);
+                        // });
 }
 
 function selectPhoto3() {
