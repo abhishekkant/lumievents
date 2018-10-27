@@ -1,6 +1,7 @@
 const HomeItemsViewModel = require("./home-items-view-model");
 const frameModule = require("ui/frame");
 const segmentedBarModule = require("tns-core-modules/ui/segmented-bar");
+const config = require("~/shared/config");
 
 function onNavigatingTo(args) {
     const component = args.object;
@@ -9,36 +10,6 @@ function onNavigatingTo(args) {
     
 }
 
-
-function sbLoaded(args) {
-    const segmentedBarComponent = args.object;
-    segmentedBarComponent.on("selectedIndexChange", (sbargs) => {
-        const page = sbargs.object.page;
-        const vm = page.bindingContext;
-        const selectedIndex = sbargs.object.selectedIndex;
-        vm.set("prop", selectedIndex);
-        switch (selectedIndex) {
-            case 0:
-                vm.set("visibility1", true);
-                vm.set("visibility2", false);
-                vm.set("visibility3", false);
-                break;
-            case 1:
-                vm.set("visibility1", false);
-                vm.set("visibility2", true);
-                vm.set("visibility3", false);
-                break;
-            case 2:
-                vm.set("visibility1", false);
-                vm.set("visibility2", false);
-                vm.set("visibility3", true);
-                break;
-            default:
-                break;
-        }
-    });
-
-}
 function edit(args) {
     var target = args.object;
     var index = target.index;
@@ -77,6 +48,5 @@ function onItemTap(args) {
 exports.onAddTap = onAddTap;
 exports.onItemTap = onItemTap;
 exports.onNavigatingTo = onNavigatingTo;
-exports.sbLoaded =  sbLoaded;
-exports.edit =  edit;
+exports.edit = edit;
 

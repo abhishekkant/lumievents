@@ -10,7 +10,7 @@
     </ActionBar>
 
 <StackLayout>
-<SegmentedBar selectedIndex="{{ selectedDay }}">
+<SegmentedBar selectedIndexChanged="{{sbLoaded2}}" selectedIndex="{{ sbSelectedIndex }}">
 <SegmentedBar.items>
 <SegmentedBarItem title="Day 1" />
 <SegmentedBarItem title="Day 2" />
