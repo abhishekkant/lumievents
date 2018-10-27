@@ -63,6 +63,7 @@ module.exports = {
     azPhotosTableUrl:"https://lumievents.azurewebsites.net/tables/photos",
     AZURE_STORAGE_CONNECTION_STRING: "DefaultEndpointsProtocol=https;AccountName=eventresources;AccountKey=gZJNy2J0LnZYKN+jhbs0ZjrFhCIRhX4/LBQtwv96+V0TO+x/OazEF7zQ3EWNnBYYi7oVYH1JdWNIwDZsoonw1A==;EndpointSuffix=core.windows.net",
     AzureContainer:"thailand",
+    EventStartDate: "2018-12-15T00:00:00.000Z",
     checkConnectivity: function() {
         // result is ConnectionType enumeration (none, wifi or mobile)
         const myConnectionType = connectivityModule.getConnectionType();
