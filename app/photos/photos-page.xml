@@ -3,11 +3,9 @@
     <ActionBar class="action-bar">
         <Label class="action-bar-title" text="Social"></Label>
     </ActionBar>
-
-  
-<!--    
+   
     <Button text="Select Image" tap="selectPhoto" />
-   <Button text="Upload Image 2" tap="selectPhoto2" /> -->
+   <Button text="Upload Image 2" tap="selectPhoto2" />
 
 
 
@@ -24,18 +22,19 @@
         </ListView>
     </GridLayout> -->
 
-   <GridLayout rows="*, auto">
-  
-      <ListView items="{{ items }}" loaded="listViewLoaded">
+  <StackLayout>
+   <!-- <GridLayout rows="*, auto"> -->
+      <ListView items="{{ photosList }}" loaded="listViewLoaded">
          <ListView.itemTemplate>
-            <GridLayout rows="auto">
+            
              <StackLayout orientation="horizontal" class="list-group-item">
                 <Image height="250" width="200" src="{{ url }}"> </Image>
-                <Label  text="{{ name }}" textWrap="true" > </Label>
-                </StackLayout>
-            </GridLayout>
+                <Label  text="{{ description }}" textWrap="true" > </Label>
+            </StackLayout>
+            
          </ListView.itemTemplate>
       </ListView>
-   </GridLayout>
-
+   <!-- </GridLayout> -->
+  <ActivityIndicator busy="{{ isBusy }}" />
+  </StackLayout>
 </Page>

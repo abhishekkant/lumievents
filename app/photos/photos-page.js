@@ -1,19 +1,14 @@
 const PhotosViewModel = require("./photos-view-model");
-const imagepicker = require("nativescript-imagepicker");
+
 //const image2base64 = require("image-to-base64");
-//const Crypto = require("crypto");
-// const path = require("path");
-// const util = require("util");
-// const stream = require("stream");
-// const emitter = require("emitter");
-//const nsAzureStorage = require("nativescript-azure-storage");
+
 const config = require("~/shared/config");
 //const platform = require("tns-core-modules/platform");
-//const imageSourceModule = require("tns-core-modules/image-source");
+
 //const fileSystemModule = require("tns-core-modules/file-system");
 //const bghttp = require("nativescript-background-http");
 //const session = bghttp.session("file-upload");
-//const fileSystemModule = require("tns-core-modules/file-system");
+
 /* ***********************************************************
 * Use the "onNavigatingTo" handler to initialize the page binding context.
 *************************************************************/
@@ -49,60 +44,6 @@ const uploadLocalFile = async (mycontainer, filePath) => {
         });
     });
 };*/
-    
-
-function selectPhoto() {
-    // Use SharedKeyCredential with storage account and account key
-    //const blobService = azure.createBlobService();
-    const mycontainer = config.AzureContainer;
-    const azureNSStorage = new nsAzureStorage.NativeScriptAzureStorage(config.AZURE_STORAGE_CONNECTION_STRING);
-    const blobName = "sample.png";
-    const context = imagepicker.create({ mode: "single" }); // use "multiple" for multiple selection
-    context
-    .authorize()
-    .then(() => {
-        return context.present();
-    })
-    .then((selection) => {
-        selection.forEach((selected) => {
-            // process the selected image
-            // Create a blob
-            let path = selected.android;
-            //const folder = fileSystemModule.knownFolders.currentApp();
-            //const path = fileSystemModule.path.join(folder.path, "images/logo.png");
-            const imageFromLocalFile = imageSourceModule.fromFile(path);
-            
-           let base64string = imageFromLocalFile.toBase64String('jpg');
-           
-          // var buffer = new Buffer(base64string, 'base64');
-           azureNSStorage.uploadBlob(mycontainer, blobName, base64string)
-           .then(() => alert(`Uploaded successfuly`))
-           .catch((err) => alert(`Error uploading: ${err}`));
-           
-            
-        //    var blobService = nsAzureStorage.createBlobService();
-        //    blobService.createBlockBlobFromLocalFile(mycontainer, blobName, path, function(error, result, response) {
-        //        if (!error) {
-                
-        //            // file uploaded 
-        //             alert(`Uploaded successfuly`);
-        //        }
-        //        else{
-        //            alert(error);
-        //        }
-        //      })
-
-        //     const execute = async () => {
-        //     response = await uploadLocalFile(mycontainer, localFilePath);
-        //     }
-
-        //     execute().then(() => console.log("Done")).catch((e) => console.log(e));
-         });
-       // list.items = selection;
-    }).catch((e) => {
-        alert(e);
-    });
-}
 
 
 function selectPhoto2() {
@@ -261,5 +202,3 @@ function selectPhoto3() {
 }
 
 exports.onNavigatingTo = onNavigatingTo;
-exports.selectPhoto = selectPhoto;
-exports.selectPhoto2 = selectPhoto2;

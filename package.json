@@ -8,7 +8,7 @@
       "version": "4.2.0"
     }
   },
-  "description": "NativeScript Application",
+  "description": "Luminous Event App",
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "https://github.com/abhishekkant/lumievents",
   "scripts": {
@@ -16,14 +16,12 @@
   },
   "dependencies": {
     "image-to-base64": "^2.0.1",
-    "nativescript-background-http": "^3.3.0",
+    "nativescript-azure-storage": "1.2.0",
+    "nativescript-background-http": "3.3.0",
     "nativescript-imagepicker": "6.0.4",
     "nativescript-permissions": "1.2.3",
     "nativescript-theme-core": "~1.0.4",
-    "stream": "0.0.2",
-    "tns-core-modules": "4.2.1",
-    "url": "^0.11.0",
-    "util": "^0.11.0"
+    "tns-core-modules": "4.2.1"
   },
   "devDependencies": {
     "eslint": "5.6.0",

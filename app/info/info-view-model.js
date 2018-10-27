@@ -8,7 +8,7 @@ function InfoViewModel() {
         isBusy:false,
         lastnotificationTime: "",
         notifications: new ObservableArray([]),
-        addButtonVisibility: 'visible',
+        addButtonVisibility: "visible",
         getNotifications: function() {
             this.isBusy = true;
             fetchModule.fetch(config.azNotificationsTableUrl, {
