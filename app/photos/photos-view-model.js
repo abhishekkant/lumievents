@@ -89,7 +89,7 @@ function PhotosViewModel() {
         onload: function(index) {
             this.isBusy = true;
 
-            const CurrentPhotosUrl = config.azPhotosTableUrl;
+            const CurrentPhotosUrl = config.azPhotosTableUrl + "/?orderby=createdAt%20desc";
             
             fetchModule.fetch(CurrentPhotosUrl, {
                 headers: {
