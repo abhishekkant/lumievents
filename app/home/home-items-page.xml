@@ -16,8 +16,8 @@
 <SegmentedBarItem title="Day 4" />
 </SegmentedBar.items>
 </SegmentedBar>
-<StackLayout style="margin:15px">
-<Label text= "Current Event" style="text-align: center;color:Red"></Label>
+<StackLayout>
+<Label text="Current Event" id="currentEvent"></Label>
  <Label text="Event Name: class="text-left" "></Label> <Label text="{{ CurrentEventName }}" class="text-left"></Label>
 <Label text="Event Start Date: "></Label><Label text="{{ CurrentEventDate }}" textWrap="true" style="float:right"></Label>
 <Label text="Event End Date: "></Label><Label text="{{ CurrentEventEndDate }}" textWrap="true" style="float:right"></Label>
