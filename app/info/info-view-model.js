@@ -2,13 +2,13 @@ const observableModule = require("data/observable");
 const fetchModule = require("fetch");
 const config = require("~/shared/config");
 const ObservableArray = require("data/observable-array").ObservableArray;
-
+const appSettings = require("application-settings");
 function InfoViewModel() {
     const viewModel = observableModule.fromObject({
         isBusy:false,
         lastnotificationTime: "",
         notifications: new ObservableArray([]),
-        addButtonVisibility: 'visible',
+        addButtonVisibility: 'collapsed',
         getNotifications: function() {
             this.isBusy = true;
             fetchModule.fetch(config.azNotificationsTableUrl, {
@@ -34,6 +34,12 @@ function InfoViewModel() {
                     });
                 });
                 this.isBusy = false;
+                var roll= appSettings.getString("role").toLowerCase();
+                if(roll == "admin" ||roll =="manager" ) 
+                {
+                    viewModel.addButtonVisibility = "visible";
+                }
+               
             });
         },
 
