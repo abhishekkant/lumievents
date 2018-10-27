@@ -3,15 +3,18 @@ const fetchModule = require("fetch");
 const config = require("~/shared/config");
 const ObservableArray = require("data/observable-array").ObservableArray;
 const appSettings = require("application-settings");
+
 function InfoViewModel() {
     const viewModel = observableModule.fromObject({
         isBusy:false,
         lastnotificationTime: "",
         notifications: new ObservableArray([]),
-        addButtonVisibility: 'collapsed',
+        addButtonVisibility: "collapsed",
+        
         getNotifications: function() {
             this.isBusy = true;
-            fetchModule.fetch(config.azNotificationsTableUrl, {
+            const notificationURL = config.azNotificationsTableUrl + "?$orderby=createdAt desc";
+            fetchModule.fetch(notificationURL, {
                 headers: {
                     "ZUMO-API-VERSION":"2.0.0"
                 }
@@ -34,8 +37,8 @@ function InfoViewModel() {
                     });
                 });
                 this.isBusy = false;
-                var roll= appSettings.getString("role").toLowerCase();
-                if(roll == "admin" ||roll =="manager" ) 
+                const roll = appSettings.getString("role").toLowerCase();
+                if (roll === "admin" || roll === "manager") 
                 {
                     viewModel.addButtonVisibility = "visible";
                 }

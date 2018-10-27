@@ -6,6 +6,7 @@
     </ActionBar>
 
     <StackLayout>
+
     <ListView items="{{ notifications }}" class="list-group" id="notificationsListView">
      <ListView.itemTemplate>
             <StackLayout orientation="horizontal" class="list-group-item">
@@ -15,5 +16,7 @@
         </ListView.itemTemplate>
         </ListView>
         <ActivityIndicator busy="{{ isBusy }}" />
+       
     </StackLayout>
+    
 </Page>
