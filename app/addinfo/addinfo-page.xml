@@ -7,6 +7,6 @@
     <StackLayout>
                    
      <TextField class="input input-border" style="border:1px solid grey" height="100" textWrap="true"  autocorrect="false" hint="Write Info" text="" returnKeyType="send"/>
-
+    
     </StackLayout>
 </Page>
