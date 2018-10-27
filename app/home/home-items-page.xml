@@ -5,6 +5,8 @@
 
     <ActionBar class="action-bar">
         <Label class="action-bar-title" text="Events List"></Label>
+                <ActionItem  class="btn btn-primary" text="Add" tap="onAddTap" android.systemIcon="ic_menu_add" android.position="right"   visibility="{{ Role=='Admin' ? 'visible' : 'collapsed' }}" ></ActionItem>
+
     </ActionBar>
 
 <StackLayout>

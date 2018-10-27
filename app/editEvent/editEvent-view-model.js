@@ -58,6 +58,7 @@ function EditEventViewModel(id) {
                             alert("Event not update");
                         }
                     }).catch((e) => {
+                        alert(e);
                     });
 
                

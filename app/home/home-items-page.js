@@ -53,7 +53,11 @@ function edit(args) {
         frameModule.topmost().navigate(navigationOptions);
    // alert(index);
 };
-
+function onAddTap(args) {
+    const button = args.object;
+    const page = button.page;
+    page.frame.navigate("addEvents/addEvents-page");
+}
 function onItemTap(args) {
     const view = args.view;
     const page = view.page;
@@ -70,7 +74,7 @@ function onItemTap(args) {
         }
     });
 }
-
+exports.onAddTap = onAddTap;
 exports.onItemTap = onItemTap;
 exports.onNavigatingTo = onNavigatingTo;
 exports.sbLoaded =  sbLoaded;

@@ -1,12 +1,16 @@
-<Page navigatingTo="onNavigatingTo" class="page"
+<Page loaded="onNavigatingTo" class="page"
     xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar">
         <Label class="action-bar-title" text="Add Information"></Label>
+        <NavigationButton tap="Cancel" android.systemIcon="ic_menu_back"/>
     </ActionBar>
 
     <StackLayout>
                    
-     <TextField class="input input-border" style="border:1px solid grey" height="100" textWrap="true"  autocorrect="false" hint="Write Info" text="" returnKeyType="send"/>
-
+     <TextField text="{{ message }}" margine="10" class="input input-border"  height="100" textWrap="true"  autocorrect="false" hint="Write Info" returnKeyType="send"/>
+  
+  
+        <Button text="Send Info" tap="onSendTap" class="btn btn-primary btn-active"/>
+        <Button class="btn btn-warning"  text="Cancel" tap="Cancel"></Button>
     </StackLayout>
 </Page>

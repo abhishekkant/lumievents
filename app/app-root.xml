@@ -17,7 +17,7 @@ http://docs.nativescript.org/cookbook/ui/tab-view
     <TabViewItem title="Social" ios:iconSource="res://tabIcons/search" android:iconSource="res://search">
         <Frame id="social-frame-id" defaultPage="photos/photos-page"></Frame>
     </TabViewItem>
-      <TabViewItem title="Info" ios:iconSource="res://tabIcons/pen" android:iconSource="res://pen">
+      <TabViewItem title="Info" ios:iconSource="res://tabIcons/browse" android:iconSource="res://browse">
         <Frame id="info-frame-id" defaultPage="info/info-page"></Frame>
     </TabViewItem>
 </TabView>
