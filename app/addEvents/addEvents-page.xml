@@ -15,15 +15,17 @@
                 text="{{ EventVenue }}"></TextField>
                  <Label class="h2 text-center" text="Event Start Date"></Label>
 
-                <DatePicker year="{{ currentYear }}" month="{{ currentMonth }}" day="{{ currentDay}}" minDate="1970-01-01" maxDate="2100-12-31"
+                <DatePicker year="{{ currentYear }}" month="{{ currentMonth }}" day="{{ currentDay}}" minDate="2018-10-10" maxDate="2100-12-31"
 />
-                <TimePicker hour="{{ currentHour }}" minute="{{ currentMinute }}" verticalAlignment="center"/>
+<TimePicker hour="{{ currentHour }}" minute="{{ currentMinute }}" verticalAlignment="center"/>
+                <TimePicker hour="{{ currentHour }}" minute="{{ currentMinute }}" verticalAlignment="center" loaded="onPickerLoaded" />
                  
                  <Label class="h2 text-center" text="Event End Date"></Label>
  
-<DatePicker year="{{ EndYear }}" month="{{ EndMonth }}" day="{{ EndDay}}" minDate="1970-01-01" maxDate="2100-12-31"
+<DatePicker year="{{ EndYear }}" month="{{ EndMonth }}" day="{{ EndDay}}"  minDate="2018-10-10"  maxDate="2100-12-31"
 />
-<TimePicker hour="{{ EndHour }}" minute="{{ EndMinute }}" verticalAlignment="center"   />
+<TimePicker hour="{{ currentHour }}" minute="{{ currentMinute }}" verticalAlignment="center"/>
+<TimePicker hour="{{ EndHour }}" minute="{{ EndMinute }}" verticalAlignment="center" loaded="onPickerLoaded"    />
          
                  <TextField class="m-t-10 m-b-10 m-l-15 m-r-15"   visibility="collapse" autocapitalization="none"
                 text="{{ id }}"></TextField>
