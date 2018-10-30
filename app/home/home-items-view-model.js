@@ -12,6 +12,7 @@ function HomeItemsViewModel() {
         
         allSessions: [],
         WorkingDate:config.EventStartDate,
+        WorkingDateEnd:"2018-12-15T23:59:00.000Z",
         CurrentEventName:"",
         CurrentEventVenue:"",
         CurrentEventDate:"",
@@ -33,16 +34,24 @@ function HomeItemsViewModel() {
                 switch (selectedIndex) {
                     case 0:
                         vm.set("WorkingDate", config.EventStartDate);
+                        vm.set("WorkingDateEnd", wdate2.add(1, "days").format());
                         break;
                     case 1:
                         
                         vm.set("WorkingDate", wdate2.add(1, "days").format());
+                        vm.set("WorkingDateEnd", wdate2.add(1, "days").format());
+                        //vm.set("WorkingDateEnd", wdate2.hour(23.59, "hour").format());
+                        
                         break;
                     case 2:
                         vm.set("WorkingDate", wdate2.add(2, "days").format());
+                        vm.set("WorkingDateEnd", wdate2.add(1, "days").format());
+                       // vm.set("WorkingDateEnd", wdate2.hour(23.59, "hour").format());
                         break;
                         case 3:
                         vm.set("WorkingDate", wdate2.add(3, "days").format());
+                        vm.set("WorkingDateEnd", wdate2.add(1, "days").format());
+                       // vm.set("WorkingDateEnd", wdate2.hour(23.59, "hour").format());
                         break;
                     default:
                         break;
@@ -54,115 +63,68 @@ function HomeItemsViewModel() {
                 viewModel.CurrentEventDate = "";
                 viewModel.CurrentEventImage ="";
                 viewModel.CurrentEventEndDate ="";
+                viewModel.allSessions=[];
             this.onload();
         },
-      
-        // edit: function (index) {
-        //     //alert(index);
-        //             let EventUrl=config.azEventsTableUrl;
-        //             var id=index;
-        //             EventUrl = EventUrl.concat("?$filter=id%20eq%20'", id,"'");
-                
-        //             fetchModule.fetch(CurrentEventUrl, {
-        //                 headers: {
-        //                     "ZUMO-API-VERSION":"2.0.0"
-        //                 }
-        //             })
-        //             .then((response) => {
-        //                 if (!response.ok) {
-        //                     console.log(JSON.stringify(response));
-        //                 }
-        //                 else {
-        //                     console.log(JSON.stringify(response));
-            
-        //                     return response.json();
-        //                 }
-        //             })
-        //             .then((data) => {
-        //             if (data !== undefined) {
-        //                 if (data.length === 0) {
-        //                         dialogsModule.alert({
-        //                             message:"No Current Event Found",
-        //                             okButtonText: "OK"
-        //                         });
-        //                     }
-        //                     else {
-        //                         data.forEach((noti) => {
-        //                             viewModel.CurrentEventName = noti.name;
-        //                             viewModel.CurrentEventVenue = noti.venue;
-        //                             viewModel.CurrentEventDate = noti.start;
-        //                             viewModel.CurrentEventImage= noti.imageurl;
-        //                             });
-        //                     // viewModel.allSessions=data;
-                            
-        //                     }          
-        //             }
-        //             else {
-        //                 dialogsModule.alert({
-        //                     message:"No Current Event Found",
-        //                     okButtonText: "OK"
-        //                 }); 
-        //             } 
-        //         });
-            
-          
-        //     },
-
         onload: function () {
-              
+            
             //const CurrentDate = "2018-12-15T06:30:00.000Z";
-            let CurrentEventUrl = config.azEventsTableUrl;
-            CurrentEventUrl = CurrentEventUrl.concat("?$filter=start%20eq%20'", viewModel.WorkingDate,"'");
+            // let CurrentEventUrl = config.azEventsTableUrl;
+            // CurrentEventUrl = CurrentEventUrl.concat("?$filter=start%20eq%20'", viewModel.WorkingDate,"'");
            
-            fetchModule.fetch(CurrentEventUrl, {
-                headers: {
-                    "ZUMO-API-VERSION":"2.0.0"
-                }
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    console.log(JSON.stringify(response));
-                }
-                else {
-                    console.log(JSON.stringify(response));
+            // fetchModule.fetch(CurrentEventUrl, {
+            //     headers: {
+            //         "ZUMO-API-VERSION":"2.0.0"
+            //     }
+            // })
+            // .then((response) => {
+            //     if (!response.ok) {
+            //         console.log(JSON.stringify(response));
+            //     }
+            //     else {
+            //         console.log(JSON.stringify(response));
     
-                    return response.json();
-                }
-            })
-            .then((data) => {
-               if (data !== undefined) {
-                    if (data.length === 0) {
-                            dialogsModule.alert({
-                                message:"No Current Event Found",
-                                okButtonText: "OK"
-                            });
-                        }
-                    else {
-                        data.forEach((noti) => {
-                            viewModel.CurrentEventName = noti.name;
-                            viewModel.CurrentEventVenue = noti.venue;
-                            viewModel.CurrentEventDate = new Date(noti.start).toLocaleString();
-                            viewModel.CurrentEventImage = noti.imageurl;
-                            viewModel.CurrentEventEndDate =new Date(noti.end).toLocaleString();
+            //         return response.json();
+            //     }
+            // })
+            // .then((data) => {
+            //    if (data !== undefined) {
+            //         if (data.length === 0) {
+            //                 dialogsModule.alert({
+            //                     message:"No Current Event Found",
+            //                     okButtonText: "OK"
+            //                 });
+            //             }
+            //         else {
+            //             data.forEach((noti) => {
+            //                 viewModel.CurrentEventName = noti.name;
+            //                 viewModel.CurrentEventVenue = noti.venue;
+            //                 viewModel.CurrentEventDate = new Date(noti.start).toLocaleString();
+            //                 viewModel.CurrentEventImage = noti.imageurl;
+            //                 viewModel.CurrentEventEndDate =new Date(noti.end).toLocaleString();
                            
-                            });
-                       // viewModel.allSessions=data;
-                       viewModel.Username = appSettings.getString("username");
-                       viewModel.Role = appSettings.getString("role");
+            //                 });
+            //            // viewModel.allSessions=data;
+            //            viewModel.Username = appSettings.getString("username");
+            //            viewModel.Role = appSettings.getString("role");
                        
-                    }
-                }
-                else {
-                    dialogsModule.alert({
-                        message:"No Current Event Found",
-                        okButtonText: "OK"
-                    });
-                }
-            });
+            //         }
+            //     }
+            //     else {
+            //         dialogsModule.alert({
+            //             message:"No Current Event Found",
+            //             okButtonText: "OK"
+            //         });
+            //     }
+            // });
 
            /* FOR LIST BINDING  */
             let Eventsurl = config.azEventsTableUrl;
-            Eventsurl = Eventsurl.concat("?$orderby=start&$filter=active%20eq%20true&start%20ne%20'", viewModel.WorkingDate, "'");
+            const WorkingDatseEnd=this.WorkingDateEnd;
+            // Eventsurl = Eventsurl.concat("?$orderby=start&$filter=active%20eq%20true&start%20ne%20'", viewModel.WorkingDate, "'");
+            
+            Eventsurl = Eventsurl.concat("?$filter=start%20gt%20'", new Date(viewModel.WorkingDate).toISOString(),"'%20and%20start%20le%20 '", new Date(viewModel.WorkingDateEnd).toISOString(),"' &$orderby=start%20asc%20");
+
             fetchModule.fetch(Eventsurl, {
                 headers: {
                     "ZUMO-API-VERSION":"2.0.0"
