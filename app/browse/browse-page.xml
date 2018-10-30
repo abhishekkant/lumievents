@@ -1,6 +1,6 @@
 <Page
     class="page"
-    navigatingTo="onNavigatingTo"  
+    loaded="onNavigatingTo"  
     xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
@@ -8,7 +8,17 @@
     </ActionBar>
 <StackLayout>
 <Button text="Login" tap="onButtonTap" />
-<Label text="Current Event"></Label>
+<!-- <Label text="Current Event"></Label> -->
 <Image src="{{ url }}"> </Image>
+<!-- <Label text="Current Event" class="currentEventData"></Label> -->
+<Label class="currentEvent" text="Event Name:"></Label> 
+<Label class="currentEventData" text="{{ CurrentEventName }}"  textWrap="true" ></Label>
+<Label class="currentEvent" text="Event Start Date: "></Label>
+<Label class="currentEventData" text="{{ CurrentEventDate }}" textWrap="true" ></Label>
+<Label class="currentEvent" text="Event End Date: "></Label>
+<Label class="currentEventData" text="{{ CurrentEventEndDate }}" textWrap="true" ></Label>
+<Label class="currentEvent" text="Event Venue: "></Label> 
+<Label class="currentEventData" text="{{ CurrentEventVenue }}" textWrap="true"></Label>
+<Image src="~/images/07-29-18-Sensation-Bangkok-2018-Banner-ss.jpg"> </Image>
 </StackLayout>
 </Page>

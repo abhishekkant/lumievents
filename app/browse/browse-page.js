@@ -4,6 +4,7 @@ const frameModule = require("ui/frame");
 function onNavigatingTo(args) {
     const component = args.object;
     component.bindingContext = new BrowseViewModel();
+    component.bindingContext.onload();
 }
 
 function onButtonTap(args) {
