@@ -22,7 +22,7 @@ function LoginViewModel() {
             /* ***********************************************************
             * Call your custom signin logic using the email and password data.
             *************************************************************/
-           this.doLogin(email, password);
+           return this.doLogin(email, password);
       
         },
 
@@ -65,14 +65,19 @@ function LoginViewModel() {
                         });
                     this.isBusy = false;
                         if (this.role !== null) {
-                            dialogsModule.alert({
-                                message:"Login Successful",
-                                okButtonText: "OK"
-                            });       
+                            // dialogsModule.alert({
+                            //     message:"Login Successful",
+                            //     okButtonText: "OK"
+                            // });       
                             appSettings.setString("username", this.email);
                             appSettings.setString("role", this.role);
                              viewModel.set('isLoggedin',true);
- 
+                             var navigationOptions={
+                                moduleName:'home/home-items-page'
+                             
+                                 }
+                         
+                                 frameModule.topmost().navigate(navigationOptions);
                         }
                         else {
                             dialogsModule.alert({

@@ -13,8 +13,15 @@ function onNavigatingTo(args) {
 function onSigninButtonTap(args) {
     const button = args.object;
     const bindingContext = button.bindingContext;
-    
-    bindingContext.signIn();
+   
+    if(bindingContext.signIn())
+    {
+        
+        var navigationOptions={
+            moduleName:'home/home-items-page'
+             }
+     frameModule.topmost().navigate(navigationOptions);
+    }
    
     
 }
