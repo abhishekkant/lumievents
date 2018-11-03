@@ -55,7 +55,9 @@ exports.scheduleNotification = function() {
     );*/
     //  LocalNotifications.cancelAll();
 };
-
+exports.onLogoutTap = function() {
+    alert('in');
+},
 module.exports = {
     azNotificationsTableUrl:"https://lumievents.azurewebsites.net/tables/notifications",
     azLoginTableUrl:"https://lumievents.azurewebsites.net/tables/userlist",

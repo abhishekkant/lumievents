@@ -2,7 +2,7 @@ const HomeItemsViewModel = require("./home-items-view-model");
 const frameModule = require("ui/frame");
 const segmentedBarModule = require("tns-core-modules/ui/segmented-bar");
 const config = require("~/shared/config");
-
+const appSettings = require("application-settings");
 function onNavigatingTo(args) {
     const component = args.object;
     component.bindingContext = new HomeItemsViewModel();
@@ -18,7 +18,7 @@ function edit(args) {
    // homemodel.edit(index);
      var navigationOptions={
        moduleName:'editEvent/editEvent-page',
-      context:index
+       context:index
         }
 
         frameModule.topmost().navigate(navigationOptions);
@@ -28,6 +28,15 @@ function onAddTap(args) {
     const button = args.object;
     const page = button.page;
     page.frame.navigate("addEvents/addEvents-page");
+}
+function onLogout(e){
+   
+    appSettings.clear();
+    var navigationOptions={
+        moduleName:'login/login-page'
+         }
+         frameModule.topmost().navigate(navigationOptions);
+  
 }
 function onItemTap(args) {
     const view = args.view;
@@ -45,6 +54,7 @@ function onItemTap(args) {
         }
     });
 }
+exports.onLogout=onLogout;
 exports.onAddTap = onAddTap;
 exports.onItemTap = onItemTap;
 exports.onNavigatingTo = onNavigatingTo;

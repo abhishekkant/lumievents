@@ -5,11 +5,15 @@
 
     <ActionBar class="action-bar">
         <Label class="action-bar-title" text="Events List"></Label>
-                <!-- <ActionItem  class="btn btn-primary" text="Add" tap="onAddTap" android.systemIcon="ic_menu_add" android.position="right"   visibility="{{ Role=='Admin' ? 'visible' : 'collapsed' }}" ></ActionItem> -->
+      <!-- <ActionItem  class="btn btn-primary" text="Add" tap="onAddTap" android.systemIcon="ic_menu_add" android.position="right"   visibility="{{ Role=='Admin' ? 'visible' : 'collapsed' }}" ></ActionItem> -->
+<!-- <Button class="btn btn-primary" text="Logout"  tap="onLogoutButtonTap"></Button> android.systemIcon="ic_menu_close_clear_cancel"-->
+
+      <ActionItem  class="btn btn-primary" text="Logout" tap="onLogout"  android.position="right"  ></ActionItem>
 
     </ActionBar>
 
 <StackLayout>
+
 <SegmentedBar selectedIndexChanged="{{sbLoaded2}}" selectedIndex="{{ sbSelectedIndex }}">
 <SegmentedBar.items>
 <SegmentedBarItem title="Day 1" />
